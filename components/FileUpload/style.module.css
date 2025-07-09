@@ -1,0 +1,90 @@
+.uploadImages {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+}
+
+.item {
+    max-width: 520px;
+    min-height: 350px;
+    max-height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid #324055;
+    overflow: hidden;
+    position: relative;
+    user-select: none;
+
+    & .delete,
+    & .preview {
+        position: absolute;
+        right: 10px;
+        width: 35px;
+        height: 35px;
+        border-radius: 8px;
+        cursor: pointer;
+        background-position: center;
+        background-size: 60%;
+        background-repeat: no-repeat;
+    }
+
+    & .delete {
+        top: 15px;
+        background-color: red;
+        background-image: url("/icons/trash.svg");
+    }
+
+    & .preview {
+        top: 60px;
+        background-color: yellow;
+        background-image: url("/icons/loop.svg");
+    }
+
+    &.upload {
+        border: 1px dashed #2275fc;
+
+        & label {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-direction: column;
+            cursor: pointer;
+
+            & .icon {
+                width: 40px;
+                height: 40px;
+
+                & svg {
+                    fill: #2275fc;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            & .text {
+                color: #95989d;
+                font-size: 14px;
+                line-height: 17px;
+
+                & span {
+                    color: #2275fc;
+                }
+            }
+
+            & input {
+                visibility: hidden;
+                opacity: 0;
+                position: absolute;
+            }
+        }
+    }
+}
