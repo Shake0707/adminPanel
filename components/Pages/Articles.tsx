@@ -38,17 +38,19 @@ export default function ArticlesPage({ pageCount }: { pageCount: string | string
     const [pageInfo, setPageInfo] = useState<{
         dataPage: number;
         dataTotalPages: number;
-    } | null>(null);
+    }>({
+        dataPage: 1,
+        dataTotalPages: 1
+    });
 
     useEffect(() => {
         if (pageInfo) {
             setPageInfo(prev => ({ dataTotalPages: prev!.dataTotalPages, dataPage: 1 }));
-            router.push("/dashboard/articles")
+            router.push("/dashboard/articles");
         }
     }, [searchTitle, selectedCategory]);
 
     const API_BASE_URL = "https://uzfk.uz"
-
 
     // Load articles from API
     useEffect(() => {
@@ -129,9 +131,9 @@ export default function ArticlesPage({ pageCount }: { pageCount: string | string
                 setIsLoading(false)
             }
         }
-
+        
         fetchArticles({ search: searchTitle, selectedCategory: selectedCategory });
-    }, [language, toast, t, pageCount, searchTitle, selectedCategory]);
+    }, [language, pageCount, searchTitle, selectedCategory]);
 
     const handleEdit = (id: string, type: string) => {
         router.push(`/dashboard/articles/${id}/${type}/edit`);
@@ -205,7 +207,6 @@ export default function ArticlesPage({ pageCount }: { pageCount: string | string
                                         <SelectValue placeholder={t("allCategories")} />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        <SelectItem value="all">All Categories</SelectItem>
                                         <SelectItem value="article">Articles</SelectItem>
                                         <SelectItem value="news">News</SelectItem>
                                         <SelectItem value="ads">Ads</SelectItem>
@@ -283,7 +284,7 @@ export default function ArticlesPage({ pageCount }: { pageCount: string | string
                     </CardContent>
                     {
                         pageInfo?.dataPage ? (
-                            <Pagenation count={pageInfo.dataTotalPages} />
+                            <Pagenation count={pageInfo.dataTotalPages} activePage={pageInfo.dataPage} />
                         ) : ""
                     }
                 </Card>

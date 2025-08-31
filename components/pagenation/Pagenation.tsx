@@ -1,13 +1,14 @@
 import Pagination from '@mui/material/Pagination';
 import classes from "./style.module.css";
 import { useRouter, useSearchParams } from 'next/navigation';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 
 interface IProps {
     count: number;
+    activePage: number;
 }
 
-export default function Pagenation({ count }: IProps) {
+export default function Pagenation({ count, activePage }: IProps) {
     const searchParams = useSearchParams();
     const router = useRouter();
 
@@ -20,6 +21,10 @@ export default function Pagenation({ count }: IProps) {
         router.push(`?${params.toString()}`);
         setPageCount(page);
     }
+
+    useEffect(() => {
+        setPageCount(activePage);
+    }, [activePage]);
 
     return (
         <Pagination
